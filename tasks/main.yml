@@ -1,2 +1,27 @@
 ---
-# tasks file for ansible-role-nginx-controller-generate-token
+- name: Fail if required variables are not defined
+  assert:
+    that: ("{{ item }} is defined") and ("{{ item }} | length > 0")
+  with_items:
+    - controller_fqdn
+    - user_email
+    - user_password
+
+- name: login to Controller
+  uri:
+    url: "https://{{controller_fqdn}}/api/v1/platform/login"
+    method: "POST"
+    body: 
+      credentials:
+        type: "BASIC"
+        username: "{{user_email}}"
+        password: "{{user_password}}"
+    body_format: json
+    return_content: yes
+    status_code: 204
+    validate_certs: false
+  register: controller_auth
+
+- name: register token for use as cookie
+  set_fact:
+    controller_auth_token: "{{controller_auth.set_cookie}}"
