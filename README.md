@@ -1,20 +1,20 @@
-NGINC Controller generate token
-=========
+NGINX Controller Generate Token
+===============================
 
-A role to generate an and return an authentication toekn for NGINX Contoller for use in other Roles or within a playbook.
+A role to generate and return an authentication token for NGINX Controller for use in other Roles or within a playbook.
 
 Requirements
 ------------
 
-NGINX Controller [](https://www.nginx.com/products/nginx-controller/)
+[NGINX Controller](https://www.nginx.com/products/nginx-controller/)
 
 Role Variables
 --------------
 
-user_email - the email adddress of the NGINX Controller user
-user_password - the password that corresponds to the user_email
-controller_fqdn - provide the DNS name of your NGINX Controller
-controller_auth_token - variable returned by this Role and conmsed for others to authenticate to the NGINX Controller API
+`user_email` - The email adddress of the NGINX Controller user
+`user_password` - The password that corresponds to the user_email
+`controller_fqdn` - The DNS name of your NGINX Controller installation
+`controller_auth_token` - Variable returned by this Role and consumed by others to authenticate to the NGINX Controller API
 
 Dependencies
 ------------
@@ -24,23 +24,27 @@ none
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+```yaml
+- hosts: localhost
+  gather_facts: no
 
-    - hosts: servers
+  vars:
+    controller_fqdn: controller.mydomain.com
+    user_email: user@example.com
+    user_password: mySecurePassword
 
-      vars:
-        controller_fqdn: controller.mydomain.com
-        user_email: user@examlple.com
-        user_password: mySecurePassword
+  tasks:
+    - include_role:
+        name: nginxinc.nginx-controller-generate-token
 
-      roles:
-         - nginxinc.nginx-controller-generate-token
-         - nginxinc.nginx-controller-agent
+    - include_role:
+        name: nginxinc.nginx-controller-agent
+```
 
 License
 -------
 
-Apache
+[Apache License, Version 2.0](./LICENSE)
 
 Author Information
 ------------------
