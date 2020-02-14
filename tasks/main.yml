@@ -7,21 +7,21 @@
     - user_email
     - user_password
 
-- name: login to Controller
+- name: Login to Controller
   uri:
-    url: "https://{{controller_fqdn}}/api/v1/platform/login"
+    url: "https://{{ controller_fqdn }}/{{ api_version }}/platform/login"
     method: "POST"
-    body: 
+    body:
       credentials:
         type: "BASIC"
-        username: "{{user_email}}"
-        password: "{{user_password}}"
+        username: "{{ user_email }}"
+        password: "{{ user_password }}"
     body_format: json
     return_content: yes
     status_code: 204
     validate_certs: false
   register: controller_auth
 
-- name: register token for use as cookie
+- name: Register token for use as cookie
   set_fact:
-    controller_auth_token: "{{controller_auth.set_cookie}}"
+    controller_auth_token: "{{ controller_auth.set_cookie }}"
