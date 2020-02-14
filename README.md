@@ -1,4 +1,4 @@
-NGINC Controller generate token
+NGINX Controller generate token
 ===============================
 
 A role to generate and return an authentication token for NGINX Controller for use in other Roles or within a playbook.
