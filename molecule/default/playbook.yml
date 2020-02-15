@@ -1,12 +1,16 @@
 ---
 - name: Converge
   hosts: all
-  roles:
-    - role: ansible-role-nginx-controller-generate-token
+
+  vars:
+  #   controller_fqdn:
+  #   user_email:
+  #   user_password:
+
+  tasks:
+    - include_role:
+        name: ansible-role-nginx-controller-generate-token
+
   post_tasks:
     - debug:
         msg: "{{ controller_auth_token }}"
-  vars:
-    # controller_fqdn:
-    # user_email:
-    # user_password:

@@ -1,4 +1,4 @@
-NGINX Controller generate token
+NGINX Controller Generate Token
 ===============================
 
 A role to generate and return an authentication token for NGINX Controller for use in other Roles or within a playbook.
@@ -24,25 +24,27 @@ none
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
 ```yaml
-- hosts: servers
+- hosts: localhost
+  gather_facts: no
 
   vars:
     controller_fqdn: controller.mydomain.com
     user_email: user@example.com
     user_password: mySecurePassword
 
-  roles:
-    - nginxinc.nginx-controller-generate-token
-    - nginxinc.nginx-controller-agent
+  tasks:
+    - include_role:
+        name: nginxinc.nginx-controller-generate-token
+
+    - include_role:
+        name: nginxinc.nginx-controller-agent
 ```
 
 License
 -------
 
-Apache License, Version 2.0
+[Apache License, Version 2.0](./LICENSE)
 
 Author Information
 ------------------
