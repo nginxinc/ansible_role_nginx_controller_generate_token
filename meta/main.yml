@@ -1,5 +1,6 @@
 ---
 galaxy_info:
+  role_name: nginx_controller_generate_token
   author: Brian Ehlert
   description: A role to generate and return an authentication token for NGINX Controller for use in other Roles or within a playbook.
   company: F5 Networks, Inc.
