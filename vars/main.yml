@@ -1,8 +1,6 @@
 ---
-## Required Vars
-# The email address (aka username) of an NGINX Controller user that can register new instances
-# user_email: ""
-# The password for the NGINX Controller user
-# user_password: ""
-# The FQDN of the controller server. ex: 10.20.30.40 or controller.example.com
-# controller_fqdn: ""
+## All the below variables are REQUIRED
+
+# user_email:  # The email address/username of an NGINX Controller user that can register new instances
+# user_password:  # The password for the NGINX Controller user
+# controller_fqdn:  # FQDN of the NGINX controller instance

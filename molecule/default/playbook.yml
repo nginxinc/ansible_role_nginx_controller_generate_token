@@ -9,7 +9,7 @@
 
   tasks:
     - include_role:
-        name: ansible_role_nginx_controller_generate_token
+        name: ansible-role-nginx-controller-generate-token
 
   post_tasks:
     - debug:
