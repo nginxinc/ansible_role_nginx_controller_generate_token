@@ -38,7 +38,7 @@ To use this role you can create a playbook such as the following:
   tasks:
     - name: Retrieve the NGINX Controller auth token
       include_role:
-        name: nginxinc.nginx-controller-generate-token
+        name: nginxinc.nginx_controller_generate_token
       vars:
         user_email: "user@example.com"
         user_password: "mySecurePassword"
