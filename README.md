@@ -13,13 +13,13 @@ Role Variables
 
 -- All the below variables are required --
 
-`user_email` - The email adddress of the NGINX Controller user.
+`controller.user_email` - The email address of the NGINX Controller user.
 
-`user_password` - The password that corresponds to the user_email.
+`controller.user_password` - The password that corresponds to the controller.user_email.
 
-`controller_fqdn` - The DNS name of your NGINX Controller installation.
+`controller.fqdn` - The DNS name of your NGINX Controller installation.
 
-`controller_auth_token` - Variable returned by this Role and consumed by others to authenticate to the NGINX Controller API.
+`controller.auth_token` - Variable returned by this Role and consumed by others to authenticate to the NGINX Controller API.
 
 Dependencies
 ------------
@@ -40,9 +40,11 @@ To use this role you can create a playbook such as the following:
       include_role:
         name: nginxinc.nginx_controller_generate_token
       vars:
-        user_email: "user@example.com"
-        user_password: "mySecurePassword"
-        controller_fqdn: "controller.mydomain.com"
+        controller:
+          user_email: "user@example.com"
+          user_password: "mySecurePassword"
+          fqdn: "controller.mydomain.com"
+          validate_certs: false
 ```
 
 License
@@ -56,5 +58,7 @@ Author Information
 [Brian Ehlert](https://github.com/brianehlert)
 
 [Alessandro Fael Garcia](https://github.com/alessfg)
+
+[Daniel Edgar](https://github.com/aknot242)
 
 &copy; [NGINX, Inc.](https://www.nginx.com/) 2020
