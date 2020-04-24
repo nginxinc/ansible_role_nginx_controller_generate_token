@@ -3,25 +3,25 @@
   assert:
     that: ("{{ item }} is defined") and ("{{ item }} | length > 0")
   loop:
-    - controller.fqdn
-    - controller.user_email
-    - controller.user_password
+    - nginx_controller_fqdn
+    - nginx_controller_user_email
+    - nginx_controller_user_password
 
 - name: Login to Controller
   uri:
-    url: "https://{{ controller.fqdn }}/{{ api_version }}/platform/login"
+    url: "https://{{ nginx_controller_fqdn }}/{{ api_version }}/platform/login"
     method: "POST"
     body:
       credentials:
         type: "BASIC"
-        username: "{{ controller.user_email }}"
-        password: "{{ controller.user_password }}"
+        username: "{{ nginx_controller_user_email }}"
+        password: "{{ nginx_controller_user_password }}"
     body_format: json
     return_content: yes
     status_code: 204
-    validate_certs: "{{ controller.validate_certs | default(false) }}"
+    validate_certs: "{{ nginx_controller_validate_certs | default(false) }}"
   register: controller_auth
 
 - name: Register token for use as cookie
   set_fact:
-    controller: "{{ controller | combine({'auth_token': controller_auth.set_cookie}) }}"
+    nginx_controller_auth_token: "{{ controller_auth.set_cookie }}"
