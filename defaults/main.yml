@@ -1,2 +1,2 @@
 ---
-api_version: "api/v1"
+nginx_controller_api_version: "api/v1"
