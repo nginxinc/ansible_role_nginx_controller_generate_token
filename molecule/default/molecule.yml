@@ -1,24 +1,69 @@
 ---
 driver:
   name: docker
-lint:
-  name: yamllint
+lint: |
+  set -e
+  yamllint .
+  ansible-lint --force-color
 platforms:
+  - name: mock-server
+    groups:
+      - mock_server
+    image: alpine:3.12
+    dockerfile: ../MockServerDockerfile
+    privileged: true
+    networks:
+      - name: molecule-test
+    ports:
+      - 1080:1080
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:rw"
   - name: debian-stretch
+    groups:
+      - controller
     image: debian:stretch-slim
-    dockerfile: Dockerfile.j2
+    dockerfile: ../Dockerfile.j2
+    privileged: true
+    networks:
+      - name: molecule-test
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:rw"
+    command: "/sbin/init"
   - name: debian-buster
+    groups:
+      - controller
     image: debian:buster-slim
-    dockerfile: Dockerfile.j2
+    dockerfile: ../Dockerfile.j2
+    privileged: true
+    networks:
+      - name: molecule-test
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:rw"
+    command: "/sbin/init"
   - name: ubuntu-xenial
+    groups:
+      - controller
     image: ubuntu:xenial
-    dockerfile: Dockerfile.j2
+    dockerfile: ../Dockerfile.j2
+    privileged: true
+    networks:
+      - name: molecule-test
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:rw"
+    command: "/sbin/init"
   - name: ubuntu-bionic
+    groups:
+      - controller
     image: ubuntu:bionic
-    dockerfile: Dockerfile.j2
+    dockerfile: ../Dockerfile.j2
+    privileged: true
+    networks:
+      - name: molecule-test
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:rw"
+    command: "/sbin/init"
 provisioner:
   name: ansible
   playbooks:
     converge: playbook.yml
-  lint:
-    name: ansible-lint
+  log: false
