@@ -9,7 +9,7 @@
 
 - name: Login to Controller
   uri:
-    url: "https://{{ nginx_controller_fqdn }}/{{ (nginx_controller_api_version | length > 0) | ternary(nginx_controller_api_version + '/', '') }}platform/login"
+    url: "https://{{ nginx_controller_fqdn }}/{{ nginx_controller_api_version }}/platform/login"
     method: "POST"
     body:
       credentials:

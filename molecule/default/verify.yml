@@ -9,7 +9,7 @@
         method: PUT
         body:
           httpRequest:
-            path: "/platform/login"
+            path: "/api/v1/platform/login"
           times:
             atLeast: 8
             atMost: 8

@@ -7,12 +7,11 @@
       raw: "nohup java -Dfile.encoding=UTF-8 -cp /mockserver-netty-jar-with-dependencies.jar:/libs/* -Dmockserver.propertyFile=/mockserver.properties org.mockserver.cli.Main -serverPort 1080 </dev/null >/dev/null 2>&1 & sleep 1"
       changed_when: false
 
-- name: Prepare
+- name: Set Expectations
   hosts: mock_server
   connection: local
   gather_facts: false
   tasks:
-
     - name: Reset mock server expectations
       uri:
         url: "https://{{ inventory_hostname }}:1080/mockserver/reset"
@@ -27,7 +26,7 @@
         url: "https://{{ inventory_hostname }}:1080/mockserver/openapi"
         method: PUT
         body:
-          specUrlOrPayload: "{{ lookup('file','../files/controller-3-9-openapi-spec.json') }}"
+          specUrlOrPayload: "{{ lookup('file','files/controller-3-9-openapi-spec.json') }}"
           operationsAndResponses:
             login: "204"
         status_code: 201

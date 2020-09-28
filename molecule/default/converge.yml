@@ -1,0 +1,17 @@
+---
+- name: Converge
+  hosts: controller
+  gather_facts: false
+  tasks:
+    - name: Call Get Token Role
+      include_role:
+        name: ansible-role-nginx-controller-generate-token
+      vars:
+        nginx_controller_user_email: test@test.com
+        nginx_controller_user_password: thisismypassword
+        nginx_controller_fqdn: mock-server.molecule-test:1080
+        nginx_controller_auth_token: initialvalue
+        nginx_controller_validate_certs: false
+
+    - debug:
+        msg: "{{ nginx_controller_auth_token }}"
