@@ -1,7 +1,6 @@
 ---
 - name: Converge
   hosts: controller
-  gather_facts: false
   tasks:
     - name: Call Get Token Role
       include_role:
@@ -10,8 +9,15 @@
         nginx_controller_user_email: test@test.com
         nginx_controller_user_password: thisismypassword
         nginx_controller_fqdn: mock-server.molecule-test:1080
-        nginx_controller_auth_token: initialvalue
         nginx_controller_validate_certs: false
 
     - debug:
         msg: "{{ nginx_controller_auth_token }}"
+
+    - name: Save Auth Token variable to a file on the mock server so we can consume it in the verify playbook
+      copy:
+        content: "{{ nginx_controller_auth_token }}"
+        dest: "/tmp/verify-variable"
+        mode: 0644
+      changed_when: false
+      delegate_to: mock-server
