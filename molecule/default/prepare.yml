@@ -1,0 +1,40 @@
+---
+- name: Prepare Mock Server
+  hosts: mock_server
+  become: true
+  tasks:
+    - name: Start mock server
+      raw: "nohup java -Dfile.encoding=UTF-8 -cp /mockserver-netty-jar-with-dependencies.jar:/libs/* -Dmockserver.propertyFile=/mockserver.properties org.mockserver.cli.Main -serverPort 1080 </dev/null >/dev/null 2>&1 & sleep 1"
+      changed_when: false
+
+- name: Set Expectations
+  hosts: mock_server
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: Reset mock server expectations
+      uri:
+        url: "https://{{ inventory_hostname }}:1080/mockserver/reset"
+        method: PUT
+        status_code: 200
+        headers:
+          Content-Type: application/json
+        validate_certs: false
+
+    - name: Create login api expectation
+      uri:
+        url: "https://{{ inventory_hostname }}:1080/mockserver/expectation"
+        method: PUT
+        body:
+          httpRequest:
+            method: "POST"
+            path: "/api/v1/platform/login"
+          httpResponse:
+            statusCode: 204
+            cookies:
+              session: ".eJwlzjEOwzAIQNG7MGcA22DIZSKbgNI1aaaqd2-kLn96w; HttpOnly; Secure; Path=/"
+        status_code: 201
+        body_format: json
+        headers:
+          Content-Type: application/json
+        validate_certs: false

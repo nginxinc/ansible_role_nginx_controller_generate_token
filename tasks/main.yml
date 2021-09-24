@@ -17,7 +17,7 @@
         username: "{{ nginx_controller_user_email }}"
         password: "{{ nginx_controller_user_password }}"
     body_format: json
-    return_content: yes
+    return_content: true
     status_code: 204
     validate_certs: "{{ nginx_controller_validate_certs | default(false) }}"
   register: controller_auth
