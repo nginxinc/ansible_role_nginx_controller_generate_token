@@ -1,20 +1,23 @@
 ---
 galaxy_info:
-  author: Brian Ehlert
-  description: A role to generate and return an authentication token for NGINX Controller for use in other Roles or within a playbook.
-  company: F5 Networks, Inc.
+  author: Alessandro Fael Garcia
+  description: A role to generate an NGINX Controller authentication token.
   role_name: nginx_controller_generate_token
-  namespace: nginxinc
+  namespace: nginxinc  # Ansible Lint requirement
+  company: F5 Networks, Inc.
 
   license: Apache License, Version 2.0
 
-  min_ansible_version: 2.7
+  min_ansible_version: 2.11
 
   platforms:
     - name: Alpine
       versions:
         - all
     - name: Amazon
+      versions:
+        - all
+    - name: Amazon Linux 2
       versions:
         - all
     - name: Debian
@@ -34,6 +37,9 @@ galaxy_info:
     - nginx
     - controller
     - api
+    - auth
     - token
-
-dependencies: []
+    - cloud
+    - infrastructure
+    - linux
+    - tools

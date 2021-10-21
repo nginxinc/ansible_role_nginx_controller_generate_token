@@ -94,6 +94,6 @@ template: |
 
   ## Resources
 
-  *   Functional configuration examples (check `converge.yml` under each `molecule` scenario) -- [github.com/nginxinc/ansible-role-nginx-controller-generate-token/tree/$RESOLVED_VERSION/molecule](https://github.com/nginxinc/ansible-role-nginx-controller-generate-token/tree/$RESOLVED_VERSION/molecule).
+  *   Functional configuration examples (check `converge.yml` under each `molecule` scenario) -- [github.com/nginxinc/ansible_role_nginx_controller_generate_token/tree/$RESOLVED_VERSION/molecule](https://github.com/nginxinc/ansible_role_nginx_controller_generate_token/tree/$RESOLVED_VERSION/molecule).
   *   Ansible Galaxy repository -- [galaxy.ansible.com/nginxinc/nginx_controller_generate_token](https://galaxy.ansible.com/nginxinc/nginx_controller_generate_token).
   *   NGINX: Better with Ansible demo -- [github.com/alessfg/nginx-ansible-demo](https://github.com/alessfg/nginx-ansible-demo).

@@ -5,22 +5,22 @@
   tasks:
     - name: Check that the login request was sent to the mock controller exactly twice per docker instance (includes the idempotence test)
       uri:
-        url: "https://{{ inventory_hostname }}:1080/mockserver/verify"
+        url: https://{{ inventory_hostname }}:1080/mockserver/verify
         method: PUT
+        headers:
+          Content-Type: application/json
+        body_format: json
         body:
           httpRequest:
-            path: "/api/v1/platform/login"
+            path: /api/v1/platform/login
           times:
             atLeast: 2
             atMost: 2
         status_code: 202
-        body_format: json
-        headers:
-          Content-Type: application/json
         validate_certs: false
 
     - name: Copy variable value collected in converge playbook to a fact
-      command: "cat /tmp/verify-variable"
+      command: cat /tmp/verify-variable
       delegate_to: mock-server
       register: var
       changed_when: false
