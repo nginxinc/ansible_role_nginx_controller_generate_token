@@ -7,13 +7,13 @@
     - nginx_controller_user_email
     - nginx_controller_user_password
 
-- name: Login to Controller
+- name: Login to NGINX Controller
   uri:
-    url: "https://{{ nginx_controller_fqdn }}/{{ nginx_controller_api_version }}/platform/login"
-    method: "POST"
+    url: https://{{ nginx_controller_fqdn }}/{{ nginx_controller_api_version }}/platform/login
+    method: POST
     body:
       credentials:
-        type: "BASIC"
+        type: BASIC
         username: "{{ nginx_controller_user_email }}"
         password: "{{ nginx_controller_user_password }}"
     body_format: json

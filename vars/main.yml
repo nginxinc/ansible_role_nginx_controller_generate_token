@@ -1,6 +1,2 @@
 ---
-## All the below variables are REQUIRED
-
-# nginx_controller_user_email:  # The email address/username of an NGINX Controller user that can register new instances
-# nginx_controller_user_password:  # The password for the NGINX Controller user
-# nginx_controller_fqdn:  # FQDN of the NGINX controller instance
+nginx_controller_api_version: "api/v1"

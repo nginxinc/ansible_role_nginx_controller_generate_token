@@ -1,2 +1,10 @@
 ---
-nginx_controller_api_version: "api/v1"
+# Required -- The email address of the NGINX Controller user.
+# nginx_controller_user_email: ""
+# Required -- The password of the NGINX Controller user.
+# nginx_controller_user_password: ""
+# Required -- The FQDN of NGINX Controller
+# nginx_controller_fqdn: ""
+
+# Whether NGINX Controller SSL cert should be validated or not.
+# nginx_controller_validate_certs: false
