@@ -1,5 +1,7 @@
 # Ansible NGINX Controller Generate Token Role
 
+# This repository has been archived. There will likely be no further development on the project and security vulnerabilities may be unaddressed.
+
 A role to generate and return an authentication token for NGINX Controller for use in other Roles or within a playbook.
 
 ## Requirements
